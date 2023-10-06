@@ -33,10 +33,12 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Datum> cryptoList = null;
 
+    public static final String TAG="MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.ui_main);
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
         initRecyclerView();
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getCoinList() {
 
+        try{
 
 
 
@@ -87,12 +90,16 @@ public class MainActivity extends AppCompatActivity {
                 // do not reinitialize an existing reference used by an adapter
                 // add to the existing list
 
-                Log.e("TAGSamansss", "onResponse: "+response.errorBody() );
+                Log.e("TAGSamansss", "onResponse: " + response.errorBody());
+                if (list.getData().size() > 0) {
+                    cryptoList.clear();
+                    cryptoList.addAll(list.getData());
 
-                cryptoList.clear();
-                cryptoList.addAll(list.getData());
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT).show();
+                }
 
-                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -102,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
                 call.cancel();
             }
         });
+
+        }catch (Exception e){
+            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "getCoinList: "+e.getMessage() );
+        }
     }
 
 }
