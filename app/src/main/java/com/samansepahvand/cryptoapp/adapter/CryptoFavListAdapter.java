@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -148,7 +147,7 @@ public class CryptoFavListAdapter extends RecyclerView.Adapter<CryptoFavListAdap
         TextView textView1h;
 
         ImageView imgLogo;
-        SimpleDraweeView draweeView;
+
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview

@@ -3,16 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/button_background_all_radius_green.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/button_background_all_radius_newblack.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/button_background_all_radius_red.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/card_background_all_radius.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/card_background_all_radius_green.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/card_background_all_radius_hight.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/card_background_all_radius_low.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/card_background_all_radius_medium.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/card_background_all_radius_red.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/card_background_all_rectengle.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/ic_baseline_edit_note_24.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/ic_baseline_trending_up_24_green.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/ic_baseline_trending_up_24_red.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/ic_outline_notifications_24.xml" value="0.37083333333333335" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/ic_round_arrow_back_24.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/ic_round_star_rate_24.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/ic_twotone_more_horiz_24.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/drawable/point_circle_red.xml" value="0.37083333333333335" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/activity_coin_page.xml" value="0.3546875" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/activity_coin_page_new.xml" value="0.33" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/activity_main.xml" value="0.3546875" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/crypto_list_item.xml" value="0.3546875" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/crypto_list_item_new.xml" value="0.3546875" />

@@ -45,12 +45,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_middle_amount"
+                    android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="$12,365,24"
+                    android:text="$12,365.24"
                     android:textColor="@color/gray2"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -64,20 +64,20 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txt_middle_amount">
+                    app:layout_constraintTop_toBottomOf="@+id/price">
 
                     <ImageView
                         android:id="@+id/imageView3"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_marginStart="8dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_middle_profit"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView3"
+                        app:layout_constraintTop_toTopOf="@+id/txt_middle_profit"
                         app:srcCompat="@drawable/ic_baseline_trending_up_24_green" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/txt_middle_profit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
@@ -96,9 +96,9 @@
                         android:text="Today's Profit"
                         android:textColor="@color/gray1"
                         android:textSize="10sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView3"
-                        app:layout_constraintStart_toEndOf="@+id/textView3"
-                        app:layout_constraintTop_toTopOf="@+id/textView3" />
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_middle_profit"
+                        app:layout_constraintStart_toEndOf="@+id/txt_middle_profit"
+                        app:layout_constraintTop_toTopOf="@+id/txt_middle_profit" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,22 +109,22 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/card_background_all_radius_low"
                     android:padding="2dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_middle_amount"
+                    app:layout_constraintBottom_toBottomOf="@+id/price"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/txt_middle_amount">
+                    app:layout_constraintTop_toTopOf="@+id/price">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/img_trending_up"
                         android:layout_width="18sp"
                         android:layout_height="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textView2"
+                        app:layout_constraintEnd_toStartOf="@+id/change1h"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_baseline_trending_up_24" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/change1h"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
@@ -135,7 +135,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toTopOf="@+id/imageView" />
+                        app:layout_constraintTop_toTopOf="@+id/img_trending_up" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline2"

@@ -1,4 +1,4 @@
-package com.samansepahvand.cryptoapp.ui;
+package com.samansepahvand.cryptoapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

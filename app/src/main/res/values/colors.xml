@@ -22,6 +22,7 @@
     <color name="materialGray">#212121</color>
     <color name="gray1">#B5B5B5</color>
     <color name="gray2">#DFDFDF</color>
+    <color name="gray_light">#F1F1F1</color>
     <color name="black">#000</color>
 
     <color name="orange">#f26a44</color>
@@ -104,6 +105,7 @@
     <color name="newBlue">#1976d2</color>
     <color name="newGreen">#4db6ac</color>
     <color name="newBlack">#263238</color>
+    <color name="newBlackLight">#0C263238</color>
     <color name="newRootBackgroundColor">#f2f4f5</color>
     <color name="newRootBackgroundColorDark">#C5C5C5</color>
     <color name="newTransparent">#00F2F4F5</color>
