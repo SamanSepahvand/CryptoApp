@@ -3,6 +3,8 @@ package com.samansepahvand.cryptoapp.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -12,20 +14,27 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.samansepahvand.cryptoapp.R;
+import com.samansepahvand.cryptoapp.adapter.CryptoFavListAdapter;
+import com.samansepahvand.cryptoapp.adapter.IntervalChartTradingViewAdapter;
+import com.samansepahvand.cryptoapp.metamodel.IntervalChartTradingViewData;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.Datum;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class CoinPage extends AppCompatActivity {
+public class CoinPage extends AppCompatActivity implements IntervalChartTradingViewAdapter.ItemClickListenerIntervalChartTradingView {
 
 
 
@@ -47,6 +56,8 @@ public class CoinPage extends AppCompatActivity {
     private ImageLoader imageLoader;
 
 
+    private  Intent intent;
+    private    Datum datum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +73,8 @@ public class CoinPage extends AppCompatActivity {
 
     private  void initNewData(){
 
-        Intent intent = getIntent();
-        Datum datum = (Datum) intent.getSerializableExtra("coin");
+         intent = getIntent();
+         datum = (Datum) intent.getSerializableExtra("coin");
 
          name = findViewById(R.id.name);
          price = findViewById(R.id.price);
@@ -103,13 +114,55 @@ public class CoinPage extends AppCompatActivity {
 
         initColorStatus(datum);
         initLoadLogo(datum.getSymbol());
-        initChartDetailView(datum.getSymbol(),null);
+        initRecyclerIntervalChartTradingView(datum);
+
 
     }
+private  void  initRecyclerIntervalChartTradingView(Datum datum){
+    RecyclerView RecyclerIntervalChartTradingView;
+    List<IntervalChartTradingViewData> dummyList = new ArrayList<>();
+    IntervalChartTradingViewAdapter recyclerAdapter;
 
-    private  void initChartDetailView(String symbol,String s){
 
-        s="15";
+    recyclerAdapter = new IntervalChartTradingViewAdapter(CoinPage.this, dummyList);
+    RecyclerIntervalChartTradingView = (RecyclerView) findViewById(R.id.recyclerIntervalChartTradingView);
+
+    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CoinPage.this, LinearLayoutManager.HORIZONTAL, false);
+
+    RecyclerIntervalChartTradingView.setLayoutManager(linearLayoutManager);
+
+    RecyclerIntervalChartTradingView.setAdapter(recyclerAdapter);
+
+    IntervalChartTradingViewData pet = new IntervalChartTradingViewData(1, "1Min", "1min");
+    dummyList.add(pet);
+
+    pet = new IntervalChartTradingViewData(2, "15 Min", "15");
+    dummyList.add(pet);
+
+    pet = new IntervalChartTradingViewData(3, "1 Hour", "1H");
+    dummyList.add(pet);
+
+    pet = new IntervalChartTradingViewData(4, "4 Hour", "4H");
+    dummyList.add(pet);
+
+    pet = new IntervalChartTradingViewData(5, "1 Day", "D");
+    dummyList.add(pet);
+
+    pet = new IntervalChartTradingViewData(6, "1 Week", "W");
+    dummyList.add(pet);
+
+    pet = new IntervalChartTradingViewData(7, "1 Month", "M");
+    dummyList.add(pet);
+
+    recyclerAdapter.notifyDataSetChanged();
+
+    initChartDetailView(datum.getSymbol(),dummyList.get(0).getKeyValue());
+
+}
+
+
+    private void initChartDetailView(String symbol,String s){
+
 
     //    String ss="https://s.tradingview.com/widgetembed/?symbol=Bitfinex:BTCUSD&interval=240&hidesidetoolbar=0&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=RSI@tv-basicstudies\u001FBB@tv-basicstudies&hideideas=1&theme=white&style=1&timezone=exchange&withdateranges=1&studies_overrides={}&overrides={}&enabled_features=[]&disabled_features=[]&referral_id=5096&utm_source=bittrex.com&utm_medium=widget&utm_campaign=chart";
 
@@ -248,4 +301,12 @@ public class CoinPage extends AppCompatActivity {
         return output.format(date);
     }
 
+    @Override
+    public void onItemClickIntervalChartTradingView(IntervalChartTradingViewData intervalChartTradingViewData) {
+
+
+        Log.e("TAG", "onItemClick:  "+datum.getSymbol()+" : "+ intervalChartTradingViewData.getKeyValue());
+        initChartDetailView(datum.getSymbol(),intervalChartTradingViewData.getKeyValue());
+
+    }
 }

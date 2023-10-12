@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_margin="3dp"
     android:layout_height="wrap_content">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +32,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/point_circle_red" />
+
+        <ImageView
+            android:id="@+id/item_img_sparklines"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_txt_price"
+            app:layout_constraintStart_toEndOf="@+id/item_txt_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/sds" />
 
         <TextView
             android:id="@+id/item_txt_title"
@@ -63,6 +75,7 @@
             android:layout_marginEnd="16dp"
             android:text="$12,365,24"
             android:textColor="@color/newBlack"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/item_txt_symbol"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,10 +88,10 @@
             android:layout_marginEnd="16dp"
             android:text="+$1,256 (0.8%)"
             android:textColor="@color/colorPrimary"
-            android:textSize="12sp"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/item_img_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/item_txt_symbol" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

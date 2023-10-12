@@ -76,9 +76,15 @@ public class CryptoFavListAdapter extends RecyclerView.Adapter<CryptoFavListAdap
             textView1h.setTextColor(ContextCompat.getColor(mContext, R.color.red));
         textView1h.setText(String.format("1h: %.2f", datum.getQuote().getUSD().getPercentChange1h()) + "%");
 
+        loadCryptoLogo(holder.imgLogo,datum);
+        loadSparkLines(holder.itemImgSparklines,datum);
 
-        ImageView imgViewLogo = holder.imgLogo;
-        String imageUri = "https://coinicons-api.vercel.app/api/icon/" + datum.getSymbol().toLowerCase(Locale.ROOT);
+
+    }
+    private  void loadCryptoLogo(ImageView imgLogo,Datum datum) {
+         String imageUri = "https://coinicons-api.vercel.app/api/icon/" + datum.getSymbol().toLowerCase(Locale.ROOT); // better qualify
+//        String imageUri = "https://s2.coinmarketcap.com/static/img/coins/64x64/" + datum.getId()+".png";
+
         try {
 
 
@@ -118,14 +124,38 @@ public class CryptoFavListAdapter extends RecyclerView.Adapter<CryptoFavListAdap
 
                     .build();
 
-            imageLoader.displayImage(imageUri, imgViewLogo, options,
+            imageLoader.displayImage(imageUri, imgLogo, options,
                     null);
 
         } catch (Exception e) {
-            imgViewLogo.setImageResource(R.drawable.noiamge);
+            imgLogo.setImageResource(R.drawable.noiamge);
         }
 
 
+    }
+
+    private  void loadSparkLines(ImageView imgLoadSparkLines,Datum datum){
+        try {
+            String imageUri = "https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/"+datum.getId()+".png";
+
+            imageLoader = ImageLoader.getInstance();
+            imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
+            options = new DisplayImageOptions.Builder()
+                    .showStubImage(
+                            R.drawable.loading)
+                    .showImageForEmptyUri(
+                            R.drawable.sds)
+                    .cacheInMemory()
+                    .cacheOnDisc()
+
+                    .build();
+
+            imageLoader.displayImage(imageUri, imgLoadSparkLines, options,
+                    null);
+
+        } catch (Exception e) {
+            imgLoadSparkLines.setImageResource(R.drawable.noiamge);
+        }
     }
 
 
@@ -147,6 +177,7 @@ public class CryptoFavListAdapter extends RecyclerView.Adapter<CryptoFavListAdap
         TextView textView1h;
 
         ImageView imgLogo;
+        ImageView itemImgSparklines;
 
 
         // We also create a constructor that accepts the entire item row
@@ -160,6 +191,7 @@ public class CryptoFavListAdapter extends RecyclerView.Adapter<CryptoFavListAdap
             price = itemView.findViewById(R.id.item_txt_price);
             textView1h = itemView.findViewById(R.id.item_txt_1h);
             imgLogo = itemView.findViewById(R.id.item_img_logo);
+            itemImgSparklines = itemView.findViewById(R.id.item_img_sparklines);
 
 
             itemView.setOnClickListener(this);

@@ -40,16 +40,15 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     //CryptoListAdapter adapter;
-    APIInterface apiInterface;
+    private APIInterface apiInterface;
     private RecyclerView recyclerView;
     private List<Datum> cryptoList = null;
     public static final String TAG = "MainActivity";
 
-    CryptoFavListAdapter adapterFav;
+    private CryptoFavListAdapter adapterFav;
 
-    ImageView imgNotif;
-    private DisplayImageOptions options;
-    private ImageLoader imageLoader;
+    private ImageView imgNotif;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
