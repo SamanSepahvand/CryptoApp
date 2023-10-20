@@ -6,12 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.samansepahvand.cryptoapp.R;
 import com.samansepahvand.cryptoapp.metamodel.IntervalChartTradingViewData;
-import com.samansepahvand.cryptoapp.metamodel.retrofit.Datum;
 
 import java.util.List;
 
@@ -93,7 +91,7 @@ public class IntervalChartTradingViewAdapter extends RecyclerView.Adapter<Interv
 
         public MyViewHolder(View view) {
             super(view);
-            name = (TextView) view.findViewById(R.id.item_interval_name);
+            name = (TextView) view.findViewById(R.id.item_filter_name);
             view1= (View) view.findViewById(R.id.item_view_selected);
 
         }

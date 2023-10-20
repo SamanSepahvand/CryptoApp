@@ -10,7 +10,7 @@
     <color name="colorFourth">@color/custom_showcase_bg</color>
     <color name="colorFifth">@color/gray</color>
 
-    <color name="colorPrimaryLight">#FFFFFF</color>
+    <color name="colorPrimaryLight">#18FB8D</color>
 
 
     <color name="cherry">#8b074f</color>
@@ -22,7 +22,7 @@
     <color name="materialGray">#212121</color>
     <color name="gray1">#B5B5B5</color>
     <color name="gray2">#DFDFDF</color>
-    <color name="gray_light">#F1F1F1</color>
+    <color name="gray_light">#E3E2E2</color>
     <color name="black">#000</color>
 
     <color name="orange">#f26a44</color>

@@ -2,6 +2,7 @@ package com.samansepahvand.cryptoapp.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +19,15 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.samansepahvand.cryptoapp.R;
 import com.samansepahvand.cryptoapp.adapter.CryptoFavListAdapter;
 import com.samansepahvand.cryptoapp.adapter.IntervalChartTradingViewAdapter;
+import com.samansepahvand.cryptoapp.bussiness.OperationResult;
+import com.samansepahvand.cryptoapp.db.repository.CryptoFavRepository;
 import com.samansepahvand.cryptoapp.metamodel.IntervalChartTradingViewData;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.Datum;
 
@@ -44,7 +49,7 @@ public class CoinPage extends AppCompatActivity implements IntervalChartTradingV
     private  TextView txtMiddleHeader;
     private  TextView txtMiddleProfit ;
     private  ImageView imgTrendingUp;
-    private  ImageView imgNotif;
+    private  ImageView imgMore;
     private  ImageView imgBack ;
     private  ImageView imgLogo;
     private  ConstraintLayout clMiddleRight;
@@ -58,6 +63,11 @@ public class CoinPage extends AppCompatActivity implements IntervalChartTradingV
 
     private  Intent intent;
     private    Datum datum;
+
+    private static SharedPreferences sharedPreferences ;
+    private static  SharedPreferences.Editor editor;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +82,8 @@ public class CoinPage extends AppCompatActivity implements IntervalChartTradingV
 
 
     private  void initNewData(){
-
+         sharedPreferences = getSharedPreferences("Crypto", Context.MODE_PRIVATE);
+         editor = sharedPreferences.edit();
          intent = getIntent();
          datum = (Datum) intent.getSerializableExtra("coin");
 
@@ -94,7 +105,7 @@ public class CoinPage extends AppCompatActivity implements IntervalChartTradingV
          txtMiddleProfit = findViewById(R.id.txt_middle_profit);
 
          imgTrendingUp = findViewById(R.id.img_trending_up);
-         imgNotif = findViewById(R.id.img_notif);
+         imgMore= findViewById(R.id.img_more);
          imgBack = findViewById(R.id.img_back);
          imgLogo = findViewById(R.id.img_logo);
 
@@ -117,7 +128,42 @@ public class CoinPage extends AppCompatActivity implements IntervalChartTradingV
         initRecyclerIntervalChartTradingView(datum);
 
 
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        imgMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                List<Datum> datumList=new ArrayList<>();
+//                datumList.add(datum);
+//                setList("CryptoList",datumList);
+               OperationResult<Boolean> result= CryptoFavRepository.getInstance().SaveCrypto(datum);
+                Toast.makeText(getBaseContext(), result.Message, Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
+
+
+
+/// save coin in sharedpreferences
+    public <T> void setList(String key, List<T> list) {
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        set(key, json);
+    }
+
+    public static void set(String key, String value) {
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    /// end sharedpreferences
 private  void  initRecyclerIntervalChartTradingView(Datum datum){
     RecyclerView RecyclerIntervalChartTradingView;
     List<IntervalChartTradingViewData> dummyList = new ArrayList<>();
@@ -178,7 +224,9 @@ private  void  initRecyclerIntervalChartTradingView(Datum datum){
     private  void  initLoadLogo(String  getSymbolName){
 
         ImageView imgViewLogo = imgLogo;
-        String imageUri = "https://coinicons-api.vercel.app/api/icon/" + getSymbolName.toLowerCase(Locale.ROOT);
+       // String imageUri = "https://coinicons-api.vercel.app/api/icon/" + getSymbolName.toLowerCase(Locale.ROOT);
+
+        String imageUri = "https://s2.coinmarketcap.com/static/img/coins/64x64/" + datum.getId()+".png";
         try {
 
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/content"
+        android:id="@+id/middle2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -215,9 +215,10 @@
             android:textColor="@color/newBlack"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/img_notif"
+            app:layout_constraintEnd_toStartOf="@+id/img_more"
             app:layout_constraintStart_toEndOf="@+id/img_back"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <ImageView
             android:id="@+id/img_back"
@@ -233,7 +234,7 @@
             app:srcCompat="@drawable/ic_round_arrow_back_24" />
 
         <ImageView
-            android:id="@+id/img_notif"
+            android:id="@+id/img_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -267,12 +268,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:autoText="false"
-                android:background="@drawable/button_background_all_radius_green"
+                android:background="@drawable/button_background_all_radius_green_light"
                 android:elegantTextHeight="false"
                 android:freezesText="false"
                 android:text="Buy"
+                android:drawableLeft="@drawable/ic_baseline_arrow_drop_up_24"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_sell"
@@ -283,13 +285,14 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/button_background_all_radius_newblack"
+                android:background="@drawable/button_background_all_radius_newred_light"
                 android:text="Sell"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/newRedDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btn_buy"
                 app:layout_constraintStart_toStartOf="parent"
+                android:drawableLeft="@drawable/ic_baseline_arrow_drop_down_24"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

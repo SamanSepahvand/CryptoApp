@@ -13,7 +13,7 @@
         >
 
     <TextView
-        android:id="@+id/item_interval_name"
+        android:id="@+id/item_filter_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -36,7 +36,7 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/item_interval_name" />
+            card_view:layout_constraintTop_toBottomOf="@+id/item_filter_name" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
