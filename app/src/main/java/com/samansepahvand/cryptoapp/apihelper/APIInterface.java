@@ -3,6 +3,7 @@ package com.samansepahvand.cryptoapp.apihelper;
 
 import com.google.gson.JsonObject;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.CryptoList;
+import com.samansepahvand.cryptoapp.metamodel.retrofit.fav.CryptoListFav;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.single.CryptoSingle;
 
 import retrofit2.Call;
@@ -34,9 +35,10 @@ public interface APIInterface {
 
 
     @Headers("X-CMC_PRO_API_KEY: 1efe5e27-9e4d-4e97-a9eb-f5a66e5f9016")
-    @GET("/v1/cryptocurrency/quotes/latest?id=1,1027,825")
-    Call<CryptoList> Cryptocurrencies();
+    @GET("/v1/cryptocurrency/quotes/latest?")
+    Call<CryptoListFav> Cryptocurrencies(@Query("id") String id);
 
+    //
     @Headers("X-CMC_PRO_API_KEY: 1efe5e27-9e4d-4e97-a9eb-f5a66e5f9016")
     @GET("/v2/tools/price-conversion?")
     Call<CryptoSingle> PriceConversion(@Query("amount") String amount, @Query("id") String id, @Query("convert_id") String id_convert);

@@ -289,7 +289,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="32dp"
-                            android:hint="1"
+                            android:hint="0"
                             android:inputType="number"
                             android:textColor="@color/newBlue"
                             android:textColorHint="@color/colorFourth"

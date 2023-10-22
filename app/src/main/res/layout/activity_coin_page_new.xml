@@ -235,15 +235,15 @@
 
         <ImageView
             android:id="@+id/img_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/card_background_all_radius"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@+id/name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_twotone_more_horiz_24" />
+            app:layout_constraintTop_toTopOf="@+id/name"
+            app:srcCompat="@drawable/ic_round_star_rate_24_gray" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

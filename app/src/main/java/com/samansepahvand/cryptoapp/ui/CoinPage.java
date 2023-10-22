@@ -138,30 +138,33 @@ public class CoinPage extends AppCompatActivity implements IntervalChartTradingV
         imgMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                List<Datum> datumList=new ArrayList<>();
-//                datumList.add(datum);
-//                setList("CryptoList",datumList);
-               OperationResult<Boolean> result= CryptoFavRepository.getInstance().SaveCrypto(datum);
-                Toast.makeText(getBaseContext(), result.Message, Toast.LENGTH_LONG).show();
+
+                OperationResult isFav= CryptoFavRepository.getInstance().IsFavCrypto(datum);
+                if (isFav.IsSuccess){
+                    OperationResult<Boolean> result= CryptoFavRepository.getInstance().RemoveCryptoFav(datum);
+                }else{
+                    OperationResult<Boolean> result= CryptoFavRepository.getInstance().SaveCrypto(datum);
+                    Toast.makeText(getBaseContext(), result.Message, Toast.LENGTH_LONG).show();
+                }
+                IsFavCrypto(datum);
 
             }
         });
 
+        IsFavCrypto(datum);
+
     }
 
-
-
-/// save coin in sharedpreferences
-    public <T> void setList(String key, List<T> list) {
-        Gson gson = new Gson();
-        String json = gson.toJson(list);
-        set(key, json);
+private void IsFavCrypto(Datum datum){
+ OperationResult isFav= CryptoFavRepository.getInstance().IsFavCrypto(datum);
+    if (isFav.IsSuccess){
+        imgMore.setImageResource(R.drawable.ic_round_star_rate_24);
+    }else{
+        imgMore.setImageResource(R.drawable.ic_round_star_rate_24_gray);
     }
 
-    public static void set(String key, String value) {
-        editor.putString(key, value);
-        editor.commit();
-    }
+}
+
 
     /// end sharedpreferences
 private  void  initRecyclerIntervalChartTradingView(Datum datum){

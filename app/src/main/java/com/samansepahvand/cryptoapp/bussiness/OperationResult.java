@@ -49,11 +49,11 @@ public class OperationResult<T> {
     }
 
     public static OperationResult Success(String message){
-        return  new OperationResult((message!=null ||!message.equals("")) ? message: "Mission Success.",true,null);
+        return  new OperationResult((message!=null && !message.equals("")) ? message: "Mission Success.",true,null);
     };
 
     public static OperationResult Failure(String message){
-        return  new OperationResult((message!=null ||!message.equals("")) ? message: "Mission Failed!",false,null);
+        return  new OperationResult((message!=null && !message.equals("")) ? message: "Mission Failed!",false,null);
     };
 
 

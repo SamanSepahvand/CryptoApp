@@ -19,6 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -31,6 +34,11 @@ import com.samansepahvand.cryptoapp.db.repository.CryptoFavRepository;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.CryptoList;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.Datum;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.Status;
+import com.samansepahvand.cryptoapp.metamodel.retrofit.fav.CryptoListFav;
+import com.samansepahvand.cryptoapp.metamodel.retrofit.fav.DatumFav;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +46,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -68,50 +77,67 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
         initRecyclerView();
-
-        // getCoinList();
         getListFav();
+
+
+
+
     }
 
     private void getListFav() {
 
-        try {
+//        try {
 
-            CryptoFavRepository.getInstance().GetCryptoFavForApi();
-            Call<CryptoList> call2 = apiInterface.Cryptocurrencies();
+            String path=  CryptoFavRepository.getInstance().GetCryptoFavForApi();
 
-            call2.enqueue(new Callback<CryptoList>() {
+            Call<CryptoListFav> call2 = apiInterface.Cryptocurrencies(path);
+            call2.enqueue(new Callback<CryptoListFav>() {
                 @Override
-                public void onResponse(Call<CryptoList> call, Response<CryptoList> response) {
-                    CryptoList list = response.body();
+                public void onResponse(Call<CryptoListFav> call, Response<CryptoListFav> response) {
 
-                    // do not reinitialize an existing reference used by an adapter
-                    // add to the existing list
+                    Log.d("XXXX", "t.getLocalizedMessage()");
+                    CryptoListFav list = response.body();
 
-                    Log.e("TAGSamansss", "onResponse: " + response.errorBody());
-                    if (list.getData().size() > 0) {
+
+                    JSONObject jObject = null;
+                    try {
+                        jObject = new JSONObject(list.getData().toString());
+                        Iterator<String> iter = jObject.keys();
                         cryptoList.clear();
-                        cryptoList.addAll(list.getData());
+                        while(iter.hasNext()){
+                            String key = iter.next();
+                            if(jObject.get(key) instanceof JSONObject) {
+
+                                JSONObject innerJObject = jObject.getJSONObject(key);
+                                JsonParser parser = new JsonParser();
+                                JsonElement mJson =  parser.parse(innerJObject.toString());
+                                Gson gson = new Gson();
+                                Datum datumFav = gson.fromJson(mJson, Datum.class);
+
+                                 cryptoList.add(datumFav);
+
+                            }
+                        }
 
                         adapterFav.notifyDataSetChanged();
-                    } else {
-                        Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT).show();
-                    }
 
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
-                public void onFailure(Call<CryptoList> call, Throwable t) {
+                public void onFailure(Call<CryptoListFav> call, Throwable t) {
                     Toast.makeText(MainActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
                     Log.d("XXXX", t.getLocalizedMessage());
-                    call.cancel();
+                   // call.cancel();
                 }
             });
 
-        } catch (Exception e) {
-            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "getCoinList: " + e.getMessage());
-        }
+//        } catch (Exception e) {
+//            Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//            Log.e(TAG, "getCoinList: " + e.getMessage());
+//        }
     }
 
     private void initView() {
@@ -132,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CryptocurencyConverterCalculator.class));
             }
         });
+
+
 
 
     }
@@ -160,6 +188,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, CoinPage.class);
                 intent.putExtra("coin", adapterFav.getItem(position));
                 startActivity(intent);
+            }
+        });
+
+
+
+        imgNotif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getListFav();
             }
         });
     }
@@ -215,13 +252,13 @@ public class MainActivity extends AppCompatActivity {
             arrayItems = gson.fromJson(serializedObject, type);
         }
 
-        if(arrayItems.size()>0) {
+//        if(arrayItems.size()>0) {
 
             cryptoList.addAll(arrayItems);
-        }else {
-            getCoinList();
-            Toast.makeText(getBaseContext(), "Null WatchList.download from api", Toast.LENGTH_SHORT).show();
-        }
+//        }else {
+//            getCoinList();
+//            Toast.makeText(getBaseContext(), "Null WatchList.download from api", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 }

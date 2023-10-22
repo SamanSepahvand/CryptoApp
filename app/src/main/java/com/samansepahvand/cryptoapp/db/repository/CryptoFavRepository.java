@@ -66,7 +66,7 @@ public class CryptoFavRepository {
         List<CryptoFav> list= new Select().from(CryptoFav.class).execute();
 
         StringBuilder builder=new StringBuilder();
-        builder.append("id=");
+        builder.append("");
         int count=0;
             for (CryptoFav item:list) {
                 builder.append(item.getIds()+"");
@@ -82,6 +82,37 @@ public class CryptoFavRepository {
     }
 
 
+    public OperationResult IsFavCrypto(Datum datum) {
+        try{
+
+            CryptoFav cryptoFavExist=new Select().from(CryptoFav.class).where("ids=?",datum.getId()).executeSingle();
+            if(cryptoFavExist!=null) return OperationResult.Success("");
+            return OperationResult.Failure("");
+
+        }catch ( Exception e){
+            return OperationResult.Failure(e.getMessage());
+
+        }
+
+    }
+
+    public OperationResult<Boolean> RemoveCryptoFav(Datum datum) {
+
+        try{
+
+            CryptoFav cryptoFavExist=new Select().from(CryptoFav.class).where("ids=?",datum.getId()).executeSingle();
+            if(cryptoFavExist!=null) {
+                cryptoFavExist.delete();
+                return OperationResult.Success("");
+            }
+            return OperationResult.Failure("");
+
+        }catch ( Exception e){
+            return OperationResult.Failure(e.getMessage());
+
+        }
+
+    }
 }
 
 
