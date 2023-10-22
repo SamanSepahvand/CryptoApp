@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,6 +33,7 @@ import com.samansepahvand.cryptoapp.R;
 import com.samansepahvand.cryptoapp.adapter.CryptoFavListAdapter;
 import com.samansepahvand.cryptoapp.apihelper.APIClient;
 import com.samansepahvand.cryptoapp.apihelper.APIInterface;
+import com.samansepahvand.cryptoapp.bussiness.Constants;
 import com.samansepahvand.cryptoapp.bussiness.OperationResult;
 import com.samansepahvand.cryptoapp.db.model.Users;
 import com.samansepahvand.cryptoapp.db.repository.CryptoFavRepository;
@@ -76,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ShimmerFrameLayout mShimmerViewContainer;
 
+
+    private TextView txtPrice,txtLoginUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,14 +106,21 @@ public class MainActivity extends AppCompatActivity {
         users.setIds(1);
         users.setUserName("sa");
         users.setPassword("123");
-        users.setFirstName("saman");
-        users.setLastName("sepahvand");
-        users.setTotalAmountUSDT(12365.24);
+        users.setFirstName("Saman");
+        users.setLastName("Sepahvand");
+        users.setTotalAmountUSDT(19365.24);
         users.setRemainAmountUSDT(12365.24);
 
         OperationResult<Boolean>  createUser =  UserRepository.getInstance().SaveUser(users);
 
         OperationResult<Users>  GetUser =  UserRepository.getInstance().GetUser(1);
+
+        txtPrice.setText("$"+users.getTotalAmountUSDT());
+
+        String str = Constants.HelloUser(users.getFirstName()+""+users.getLastName());
+        Spanned strHtml = Html.fromHtml(str);
+        txtLoginUser.setText(strHtml);
+
 
 
         Toast.makeText(getBaseContext(), ""+createUser.Message, Toast.LENGTH_SHORT).show();
@@ -206,6 +219,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CryptocurencyConverterCalculator.class));
             }
         });
+
+        txtPrice=findViewById(R.id.price);
+        txtLoginUser=findViewById(R.id.txt_login_user);
 
 
 
