@@ -317,6 +317,43 @@
             app:layout_constraintTop_toBottomOf="@+id/cl_bottom_header">
 
 
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                app:duration="2000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- Adding 7 rows of placeholders -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/crypto_list_item_new_place_holder" />
+
+                    <include layout="@layout/crypto_list_item_new_place_holder" />
+
+                    <include layout="@layout/crypto_list_item_new_place_holder" />
+
+                    <include layout="@layout/crypto_list_item_new_place_holder" />
+
+                    <include layout="@layout/crypto_list_item_new_place_holder" />
+
+                    <include layout="@layout/crypto_list_item_new_place_holder" />
+
+                    <include layout="@layout/crypto_list_item_new_place_holder" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/my_recycler_view"

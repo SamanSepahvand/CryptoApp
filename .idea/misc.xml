@@ -42,10 +42,11 @@
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/activity_main.xml" value="0.3546875" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/crypto_list_item.xml" value="0.3546875" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/crypto_list_item_new.xml" value="0.3546875" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/crypto_list_item_new_place_holder.xml" value="0.3546875" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/custom_spinner_items.xml" value="0.67" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/item_filter_crypto_list.xml" value="0.3546875" />
         <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/item_interval_chart_tradingview.xml" value="0.3546875" />
-        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/ui_main.xml" value="0.5" />
+        <entry key="..\:/Users/shant/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/ui_main.xml" value="0.4503968253968254" />
       </map>
     </option>
   </component>

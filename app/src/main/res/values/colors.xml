@@ -128,6 +128,6 @@
     <color name="description">#1a1a1a</color>
     <color name="chef">#777</color>
     <color name="timestamp">#777</color>
-
+    <color name="placeHolder">#dddddd</color>
 
 </resources>

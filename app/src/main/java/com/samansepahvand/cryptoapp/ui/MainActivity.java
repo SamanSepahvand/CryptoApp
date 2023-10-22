@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -30,7 +31,10 @@ import com.samansepahvand.cryptoapp.R;
 import com.samansepahvand.cryptoapp.adapter.CryptoFavListAdapter;
 import com.samansepahvand.cryptoapp.apihelper.APIClient;
 import com.samansepahvand.cryptoapp.apihelper.APIInterface;
+import com.samansepahvand.cryptoapp.bussiness.OperationResult;
+import com.samansepahvand.cryptoapp.db.model.Users;
 import com.samansepahvand.cryptoapp.db.repository.CryptoFavRepository;
+import com.samansepahvand.cryptoapp.db.repository.UserRepository;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.CryptoList;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.Datum;
 import com.samansepahvand.cryptoapp.metamodel.retrofit.Status;
@@ -69,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView txtCryptoList,txtCryptoConverter;
     private static SharedPreferences sharedPreferences;
 
+
+    private ShimmerFrameLayout mShimmerViewContainer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +88,29 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        initUser();
 
+
+
+
+    }
+
+    private void initUser() {
+        Users users=new Users();
+        users.setIds(1);
+        users.setUserName("sa");
+        users.setPassword("123");
+        users.setFirstName("saman");
+        users.setLastName("sepahvand");
+        users.setTotalAmountUSDT(12365.24);
+        users.setRemainAmountUSDT(12365.24);
+
+        OperationResult<Boolean>  createUser =  UserRepository.getInstance().SaveUser(users);
+
+        OperationResult<Users>  GetUser =  UserRepository.getInstance().GetUser(1);
+
+
+        Toast.makeText(getBaseContext(), ""+createUser.Message, Toast.LENGTH_SHORT).show();
     }
 
     private void getListFav() {
@@ -120,6 +149,9 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         adapterFav.notifyDataSetChanged();
+                        // Stopping Shimmer Effect's animation after data is loaded to ListView
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -140,7 +172,23 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+
+    }
+
     private void initView() {
+
+        mShimmerViewContainer=findViewById(R.id.shimmer_view_container);
+
 
         txtCryptoList = findViewById(R.id.txt_footer_left);
         txtCryptoList.setOnClickListener(new View.OnClickListener() {

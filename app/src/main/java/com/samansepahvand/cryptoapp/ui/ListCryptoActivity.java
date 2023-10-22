@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.samansepahvand.cryptoapp.R;
 import com.samansepahvand.cryptoapp.adapter.CryptoFavListAdapter;
 import com.samansepahvand.cryptoapp.adapter.CryptoListAdapter;
@@ -46,6 +47,7 @@ public class ListCryptoActivity extends AppCompatActivity  implements FilterCryp
 
 
     private List<Datum> listFilterData=new ArrayList<>();
+    private ShimmerFrameLayout mShimmerViewContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,8 @@ public class ListCryptoActivity extends AppCompatActivity  implements FilterCryp
     }
 
     private  void initView(){
+        mShimmerViewContainer=findViewById(R.id.shimmer_view_container);
+
         searchView = findViewById(R.id.txt_header_result);
         TextView textView = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         textView.setTextColor(this.getResources().getColor(R.color.gray_light));
@@ -100,6 +104,22 @@ public class ListCryptoActivity extends AppCompatActivity  implements FilterCryp
             }
         });
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mShimmerViewContainer.startShimmerAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        mShimmerViewContainer.stopShimmerAnimation();
+        super.onPause();
+
+    }
+
+
     private void getCoinList(String apiName) {
 
         try {
@@ -144,6 +164,9 @@ public class ListCryptoActivity extends AppCompatActivity  implements FilterCryp
                            cryptoList.addAll(list.getData());
                            OperationResult<Boolean> result= CryptoRepository.getInstance().SaveCrypto(list.getData());
                            adapterFav.notifyDataSetChanged();
+                           // Stopping Shimmer Effect's animation after data is loaded to ListView
+                           mShimmerViewContainer.stopShimmerAnimation();
+                           mShimmerViewContainer.setVisibility(View.GONE);
 
                        } else {
                            Toast.makeText(getBaseContext(), response.message(), Toast.LENGTH_SHORT).show();
